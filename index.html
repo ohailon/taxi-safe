@@ -1,0 +1,164 @@
+<!DOCTYPE html> <html>
+<head>
+	<title>Note Taker</title>
+	<script type=”text/javascript” charset=”utf-8” src=”phonegap.js”></script> 
+	<script type=”text/javascript” charset=”utf-8” src=”js/jquery-1.8.2.min.js”></script>
+	<script type=”text/javascript” charset=”utf-8”>
+
+	var db = window.openDatabase(“notes”, “1.0”, “Notes DB”, 1000000); 
+	db.transaction(createDB, onErrorDB, onSuccessDB);
+
+	var onGeoSuccess = function(position) { 
+		$(“#metadata”).append(“<input type=’hidden’ id=’geo’
+			value=’”+position.coords.latitude+”,”+ 
+			position.coords.longitude+”’>”);
+	};
+
+	function onGeoError(error) { 
+		$(“#status”).append(‘Geolocation error: ‘ + error.code + ‘ ‘ +
+			‘message: ‘ + error.message + ‘<br/>’);
+	}
+
+	navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+
+	function onSuccess(mediaFiles) { 
+		var i, len;
+		for (i = 0, len = mediaFiles.length; i < len; i += 1) { 
+			showMetadata(mediaFiles[i]);
+		} 
+	}
+
+	function onError(error) {
+		var msg = ‘An error occurred during capture: ‘ + error.code;
+		alert(msg, null, ‘Uh oh!’); 
+	}
+
+	function capture(type) { 
+		if (type == “image”) {
+			navigator.device.capture.captureImage(onSuccess, onError, {limit: 1}); 
+		} else if (type == “audio”) {
+			navigator.device.capture.captureAudio(onSuccess, onError, {limit: 1}); 
+		} else if (type == “video”) {
+			navigator.device.capture.captureVideo(onSuccess, onError, {limit: 1}); 
+		} else {
+			$(‘#notes’).show();
+		} 
+	}
+
+	function saveNote(){ 
+		$(“#metadata”).show(); 
+		$(“#buttons”).hide(); 
+		$(“#notes”).hide();
+	}
+
+	// Show Metadata
+	function showMetadata(mediaFile) {
+		path = mediaFile.fullPath,
+		name = mediaFile.name;
+		$(“#metadata”).append(“<input type=’hidden’ id=’filename’
+			value=’”+name+”’>”);
+		$(“#metadata”).append(“<input type=’hidden’ id=’filepath’
+			value=’”+path+”’>”); 
+		$(“#metadata”).show(); 
+		$(“#buttons”).hide(); 
+		$(“#notes”).hide();
+	}
+
+	function synch(){ 
+		var ft = new FileTransfer(); 
+		var path = $(“#filepath”).val(); 
+		var name = $(“#filename”).val();
+		db.transaction(insertRow, onErrorDB, onSuccessDB);
+
+		ft.upload(path, 
+			“http://example.com/upload.php”, 
+			function(result) {
+				$(“#status”).append(‘Upload success: ‘ + result.responseCode + ‘<br/>’);
+				$(“#status”).append(result.bytesSent + ‘ bytes sent’); 
+			},
+			function(error) {
+				$(“#status”).append(‘Error uploading file ‘ + path + ‘: ‘ +
+					error.code);
+			},
+			{ fileName: name });
+
+		$(“#metadata”).hide();
+		$(“#buttons”).show();
+		$(“#notes”).hide();
+	}
+
+	function createDB(tx) {
+		tx.executeSql(‘DROP TABLE IF EXISTS notes’); 
+		tx.executeSql(‘CREATE TABLE IF NOT EXISTS notes (id primary key,
+			title varchar, description varchar, filepath text, 
+			note_text text,geolocation text)’);
+	}
+
+	function insertRow(tx){
+		var path = $(“#filepath”).val();
+		var title = $(“#title”).val();
+		var desc = $(“#description”).val();
+		var notes = $(“#text_notes”).val();
+		var geo = $(“#geo”).val();
+		var randomid = randomUUID();
+		tx.executeSql(‘INSERT INTO notes (id,title,description,
+			filepath,note_text,geolocation) VALUES 
+			(“’+randomid+’”,”’+title+’”, “’+desc+’”,”’+path+’”, 
+			“’+notes+’”, “’+geo+’”)’);
+	}
+
+	function onErrorDB(err) {
+		$(“#status”).append(“Error processing SQL: “+err.code+”<br/>”);
+	}
+
+	function onSuccessDB() { 
+		$(“#status”).append(“Saved to DB!<br/>”);
+	}
+
+	function randomUUID() {
+		var s = [], itoh = ‘0123456789ABCDEF’;
+
+		for (var i = 0; i <32; i++) s[i] = Math.floor(Math.random()*0x10);
+
+		// Conform to RFC-4122, section 4.4
+		s[14] = 4; // Set 4 high bits of time_high field to version
+		s[19] = (s[19] & 0x3) | 0x8; // Specify 2 high bits of clock sequence
+	
+		// Convert to hex chars
+		for (var i = 0; i <36; i++) s[i] = itoh[s[i]];
+
+		return s.join(‘’); 
+	}
+</script> 
+</head> 
+
+<body>
+	<div id=”buttons”>
+		<button onclick=”capture(‘image’);”>Capture Image</button> <br> 
+		<button onclick=”capture(‘audio’);”>Capture Audio</button> <br> 
+		<button onclick=”capture(‘video’);”>Capture Video</button> <br>
+		<button onclick=”capture(‘text’);”>Write Text</button> <br> 
+	</div>
+
+	<div id=’notes’ style=’display:none’>
+		<p>Write notes:<br/>
+		<textarea id=’text_notes’ cols=’40’ rows=’15’></textarea> 
+		</p>
+		<button onClick=”saveNote();”>save</button>
+	</div>
+
+	<div id=’metadata’ style=”display:none”> 
+		<p>Title<br/>
+		<input type=’text’ id=’title’>
+		</p>
+
+		<p>Description:<br/>
+		<textarea id=’description’ cols=’40’ rows=’15’></textarea> 
+		</p>
+		<button onClick=”synch();”>save</button>
+
+	</div>
+
+	<div id=’status’></div> 
+</body>
+</html>
