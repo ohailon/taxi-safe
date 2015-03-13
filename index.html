@@ -71,7 +71,7 @@
 		db.transaction(insertRow, onErrorDB, onSuccessDB);
 
 		ft.upload(path, 
-			“http://example.com/upload.php”, 
+			“http://taxi-safe.com/upload.php”, 
 			function(result) {
 				$(“#status”).append(‘Upload success: ‘ + result.responseCode + ‘<br/>’);
 				$(“#status”).append(result.bytesSent + ‘ bytes sent’); 
