@@ -69,6 +69,7 @@
 
 	function getLat() {
 		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+		document.getElementById('results1').innerHTML='tremendous';
 	}
 
         </script>
@@ -79,5 +80,6 @@
   <button onclick="document.getElementById('results').innerHTML='QUANKEROUS';">str2 clack </button>
   <button onclick="getLat();">Take Picture</button>
    <div id="results"></div>
+   <div id="results1"></div>
 </body>
 </html>
