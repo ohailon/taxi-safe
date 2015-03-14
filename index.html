@@ -7,6 +7,10 @@
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
 
+    var myresults = document.getElementById("results");
+    var str1 = "<br>This is a string";
+    var str2 = "<br><br>We are testing here"";
+
   document.addEventListener("deviceready", onDeviceReady, false);
 
  
@@ -60,5 +64,9 @@
 </head>
 <body>
     <h1>Upload file</h1>
+  <button onclick="myresults.innerHTML=str1;">CLICK ME</button>
+  <button onclick="myresults.innerHTML=str2;">clack me</button>
+  <button onclick="onDeviceReady();">Take Picture</button>
+   <div id="results"></div>
 </body>
 </html>
