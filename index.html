@@ -5,6 +5,7 @@
     <title>File Transfer Example</title>
 
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/jquery.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     var str1 = "<br>This is a string";
@@ -68,8 +69,10 @@
 	}
 
 	function getLat() {
-		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 		document.getElementById('results1').innerHTML='tremendous';
+
+		$(“#results”).append(“QUERLICIOUS");
+		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
 	}
 
         </script>
