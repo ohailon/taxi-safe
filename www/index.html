@@ -33,33 +33,33 @@
         <div class="app">
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink" style="font-size:250%;">
-                <p class="event listening" style="font-size:300%;">Connecting to Device</p>
-                <p class="event received" style="font-size:300%;">Device is Ready</p>
+                <p class="event listening" style="font-size:200%;">Connecting to Device</p>
+                <p class="event received" style="font-size:200%;">Device is Ready</p>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-    		function getInfo() {
-		    var element = document.getElementById('info');
+    		//function getInfo() {
+		//    var element = document.getElementById('info');
 
-       		    element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
-                            'Device PhoneGap: ' + device.phonegap + '<br />' + 
-                            'Device Platform: ' + device.platform + '<br />' + 
-                            'Device UUID: '     + device.uuid     + '<br />' + 
-                            'Device Version: '  + device.version  + '<br />';
-                }
-	        getInfo();
+       		 //   element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+                  //          'Device PhoneGap: ' + device.phonegap + '<br />' + 
+                   //         'Device Platform: ' + device.platform + '<br />' + 
+                    //        'Device UUID: '     + device.uuid     + '<br />' + 
+                     //       'Device Version: '  + device.version  + '<br />';
+                //}
+	        //getInfo();
 
         </script>
 
 	<div id="top" style="font-size:300%;">
 	<div id="buttons">
 		<p><p><p>
-		<button style="font-size:400%" onclick="navigation.notification.alert("something"); app.getGeo()">DOSITION</button></div>
+		<button style="font-size:400%" onclick="alert("something");">DOSITION</button></div>
 		<p><p><p>
-		<button style="font-size:300%" onclick="app.getInfo()">PHONE INFO</button></div>
+		<button style="font-size:300%" onclick="alert("wow");">PHONE INFO</button></div>
 		<p><p><p>
 	<div id="geo" style="font-size:375%;">
 		<p><p><p>HARLO

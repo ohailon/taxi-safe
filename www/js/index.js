@@ -46,40 +46,5 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
-
-
-    function geoSuccess(position) {
-    	var str1 = 
-	  'Latitude: '          + position.coords.latitude          + '<br />' +
-          'Longitude: '         + position.coords.longitude         + '<br />' +
-          'Altitude: '          + position.coords.altitude          + '<br />' +
-          'Accuracy: '          + position.coords.accuracy          + '<br />' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br />' +
-          'Heading: '           + position.coords.heading           + '<br />' +
-          'Speed: '             + position.coords.speed             + '<br />' +
-          'Timestamp: '         + position.timestamp                + '<br />';
-
-	var element = document.getElementById('geo');
-        element.innerHTML = str1;
-
-    }
-
-    function geoError(error) {
-	var str1 = 'code: ' + error.code + '<br/> message: ' + error.message + '<br/>';
-    }
-
-    function getGeo() {
-	navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-    }
-
-    function getInfo() {
-	var element = document.getElementById('info');
-
-        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
-                            'Device PhoneGap: ' + device.phonegap + '<br />' + 
-                            'Device Platform: ' + device.platform + '<br />' + 
-                            'Device UUID: '     + device.uuid     + '<br />' + 
-                            'Device Version: '  + device.version  + '<br />';
-    }
-
 };
+
