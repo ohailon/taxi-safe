@@ -33,8 +33,8 @@
         <div class="app">
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink" style="font-size:250%;">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+                <p class="event listening" style="font-size:300%;">Connecting to Device</p>
+                <p class="event received" style="font-size:300%;">Device is Ready</p>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
@@ -49,21 +49,22 @@
                             'Device Platform: ' + device.platform + '<br />' + 
                             'Device UUID: '     + device.uuid     + '<br />' + 
                             'Device Version: '  + device.version  + '<br />';
-    }
+                }
+	        getInfo();
 
         </script>
 
 	<div id="top" style="font-size:300%;">
 	<div id="buttons">
 		<p><p><p>
-		<button style="font-size:400%" onclick="navigation.notification.alert("something"); app.getGeo()">SOSITION</button></div>
+		<button style="font-size:400%" onclick="navigation.notification.alert("something"); app.getGeo()">DOSITION</button></div>
 		<p><p><p>
 		<button style="font-size:300%" onclick="app.getInfo()">PHONE INFO</button></div>
 		<p><p><p>
-	<div id="geo">
+	<div id="geo" style="font-size:375%;">
 		<p><p><p>HARLO
         </div>
-	<div id="info" style="font-size:250%;">
+	<div id="info" style="font-size:350%;">
 		THIS IS THE INFO
         </div>
         </div>
