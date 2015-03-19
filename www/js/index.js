@@ -79,10 +79,11 @@ var app = {
     function getInfo() {
 	var element = document.getElementById('info');
 
-        element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
-                            'Device PhoneGap: ' + device.phonegap + '<br />' + 
-                            'Device Platform: ' + device.platform + '<br />' + 
-                            'Device UUID: '     + device.uuid     + '<br />' + 
-                            'Device Version: '  + device.version  + '<br />';
+        element.innerHTML = 'NNNN NNNNN NNNNNNN NNNNN NNNNNNN NNNNNNN';
+//'Device Name: '     + device.name     + '<br />' + 
+ //                           'Device PhoneGap: ' + device.phonegap + '<br />' + 
+  //                          'Device Platform: ' + device.platform + '<br />' + 
+   //                         'Device UUID: '     + device.uuid     + '<br />' + 
+    //                        'Device Version: '  + device.version  + '<br />';
     }
 
