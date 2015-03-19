@@ -32,7 +32,7 @@
     <body>
         <div class="app">
             <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
+            <div id="deviceready" class="blink" style="font-size:250%;">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
@@ -41,18 +41,31 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+    		function getInfo() {
+		    var element = document.getElementById('info');
+
+       		    element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
+                            'Device PhoneGap: ' + device.phonegap + '<br />' + 
+                            'Device Platform: ' + device.platform + '<br />' + 
+                            'Device UUID: '     + device.uuid     + '<br />' + 
+                            'Device Version: '  + device.version  + '<br />';
+    }
+
         </script>
 
-	<div id="top" style="font-size:400%;">
+	<div id="top" style="font-size:300%;">
 	<div id="buttons">
 		<p><p><p>
-		<button style="font-size:400%" onclick="navigation.notification.alert("something"); app.getGeo()">WOSITION</button></div>
+		<button style="font-size:400%" onclick="navigation.notification.alert("something"); app.getGeo()">SOSITION</button></div>
 		<p><p><p>
 		<button style="font-size:300%" onclick="app.getInfo()">PHONE INFO</button></div>
 		<p><p><p>
-	<div id="geo"></div>
-		<p><p><p>
-	<div id="info"></div>
+	<div id="geo">
+		<p><p><p>HARLO
+        </div>
+	<div id="info" style="font-size:250%;">
+		THIS IS THE INFO
+        </div>
         </div>
     </body>
 </html>
