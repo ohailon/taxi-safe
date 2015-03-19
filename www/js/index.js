@@ -79,7 +79,7 @@ var app = {
     function getInfo() {
 	var element = document.getElementById('info');
 
-        element.innerHTML = 'Device Model: '    + device.model     + '<br />' ;
+        element.innerHTML = 'Device Model: '    + navigator.device.model     + '<br />' ;
 //                            'Device PhoneGap: ' + device.cordova + '<br />' + 
 //                            'Device Platform: ' + device.platform + '<br />' + 
 //                            'Device UUID: '     + device.uuid     + '<br />' + 
